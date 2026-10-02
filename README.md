@@ -43,3 +43,4 @@ A phone-friendly guide for village hosts in India. Hosts pick a journey, ask que
 - Rules, fees and forms in the knowledge bank change often. Have a local expert review the rows marked `needs_verification` before wide launch.
 - The guide opens the browser's print dialog for Download PDF; hosts choose "Save as PDF". There is no separate Print button.
 - Not included: the old `modules/` folder and the legacy backend test.
+

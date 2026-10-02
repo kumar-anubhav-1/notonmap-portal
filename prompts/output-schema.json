@@ -2,7 +2,7 @@
   "_comment": "Tool definition for the Claude API (strict tool use). lib/prompt.js passes name, description, strict and input_schema inside `tools`, with tool_choice {type:'tool', name:'respond'}. Strict mode guarantees the shape; it cannot enforce counts above 1, so lib/profile.js and api/chat.js enforce 'exactly 3 follow_ups' and all caps. Only `sop` is optional (strict mode allows at most 24 optional parameters in total).",
   "name": "respond",
   "description": "Send the reply to the person using the NotOnMap portal, plus what you newly learned about them this turn. Always use this tool for every reply.",
-  "strict": true,
+  "strict": false,
   "input_schema": {
     "type": "object",
     "additionalProperties": false,

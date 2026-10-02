@@ -1,0 +1,158 @@
+{
+  "_comment": "Tool definition for the Claude API (strict tool use). lib/prompt.js passes name, description, strict and input_schema inside `tools`, with tool_choice {type:'tool', name:'respond'}. Strict mode guarantees the shape; it cannot enforce counts above 1, so lib/profile.js and api/chat.js enforce 'exactly 3 follow_ups' and all caps. Only `sop` is optional (strict mode allows at most 24 optional parameters in total).",
+  "name": "respond",
+  "description": "Send the reply to the person using the NotOnMap portal, plus what you newly learned about them this turn. Always use this tool for every reply.",
+  "strict": true,
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "reply_language": {
+        "type": "string",
+        "enum": ["en", "hi", "hinglish"],
+        "description": "Language of this reply: en = English, hi = Hindi in Devanagari, hinglish = Hindi in Roman letters."
+      },
+      "answer_markdown": {
+        "type": "string",
+        "description": "The on-screen answer in the reply language. Short paragraphs and bullets. No tables. Do not include the micro-step here."
+      },
+      "next_micro_step": {
+        "type": "string",
+        "description": "Exactly one action: under 2 hours, zero money, starts with a verb, one or two sentences, in the reply language."
+      },
+      "needs_human_verification": {
+        "type": "boolean",
+        "description": "True if the answer touches health, food safety, legal, licensing, police registration, insurance, structural, electrical, gas, fire, environmental or tax rules."
+      },
+      "follow_ups": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Exactly 3 tap-button suggestions in the reply language and script, in the person's own voice, each under about 7 words, specific to this person."
+      },
+      "profile_update": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "ONLY what is new or changed in the person's latest message. Empty strings and empty lists mean nothing new. Never repeat what the learned context already holds.",
+        "properties": {
+          "archetype_signal": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "archetype": { "type": "string", "enum": ["NEW_CREATOR", "EXISTING_PROVIDER", "HYBRID", "UNKNOWN"] },
+              "strength": { "type": "string", "enum": ["strong", "weak", "none"] },
+              "clue": { "type": "string", "description": "The person's own words that gave the clue, a few words. Empty if none." }
+            },
+            "required": ["archetype", "strength", "clue"]
+          },
+          "ventures_upsert": {
+            "type": "array",
+            "description": "Things they run or want to start that are new or changed this turn. Reuse the exact label from the learned context when updating.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "label": { "type": "string", "description": "Short name, e.g. '2-room homestay', 'pottery class'." },
+                "kind": {
+                  "type": "string",
+                  "enum": ["homestay", "guesthouse", "farmstay", "food_experience", "craft_experience", "farm_experience", "nature_experience", "culture_experience", "guided_walk_or_tour", "other"]
+                },
+                "stage": { "type": "string", "enum": ["idea", "planning", "running", "paused"] }
+              },
+              "required": ["label", "kind", "stage"]
+            }
+          },
+          "ventures_remove": { "type": "array", "items": { "type": "string" }, "description": "Labels of ventures the person has dropped." },
+          "location": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Only parts newly mentioned; empty string otherwise.",
+            "properties": {
+              "village": { "type": "string" },
+              "district": { "type": "string" },
+              "state": { "type": "string" },
+              "region": { "type": "string", "description": "Wider area such as Kumaon, Spiti, Western Ghats, Thar." },
+              "terrain": { "type": "string" },
+              "climate": { "type": "string" },
+              "access": { "type": "string", "description": "How guests reach them and any seasonal problems." }
+            },
+            "required": ["village", "district", "state", "region", "terrain", "climate", "access"]
+          },
+          "assets_add": { "type": "array", "items": { "type": "string" }, "description": "Things they already have that could serve guests." },
+          "assets_remove": { "type": "array", "items": { "type": "string" } },
+          "facts_add": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "category": { "type": "string", "enum": ["guests", "constraints", "local_calendar", "people", "goals"] },
+                "text": { "type": "string" }
+              },
+              "required": ["category", "text"]
+            }
+          },
+          "facts_remove": { "type": "array", "items": { "type": "string" } },
+          "experience_level": { "type": "string", "enum": ["new", "some", "experienced", "unchanged"] },
+          "log_entries": {
+            "type": "array",
+            "description": "At most 2 short micro-insights that will improve future advice.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "type": { "type": "string", "enum": ["insight", "tried", "worked", "did_not_work", "preference", "correction"] },
+                "text": { "type": "string" }
+              },
+              "required": ["type", "text"]
+            }
+          },
+          "open_threads_add": { "type": "array", "items": { "type": "string" } },
+          "open_threads_close": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": [
+          "archetype_signal", "ventures_upsert", "ventures_remove", "location",
+          "assets_add", "assets_remove", "facts_add", "facts_remove",
+          "experience_level", "log_entries", "open_threads_add", "open_threads_close"
+        ]
+      },
+      "source_ids": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "IDs from the relevant-knowledge block that you used. Empty list if none."
+      },
+      "sop": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Only include when the answer contains a repeatable procedure. The portal renders it as a print-ready PDF.",
+        "properties": {
+          "title": { "type": "string", "description": "Short title, max 8 words." },
+          "subtitle": { "type": "string", "description": "One short line on who or what it is for." },
+          "purpose": { "type": "string", "description": "One sentence." },
+          "required_items": { "type": "array", "items": { "type": "string" } },
+          "steps": {
+            "type": "array",
+            "description": "5 to 12 steps.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "heading": { "type": "string" },
+                "action": { "type": "string", "description": "One clear action sentence starting with a verb." }
+              },
+              "required": ["heading", "action"]
+            }
+          },
+          "safety_notes": { "type": "array", "items": { "type": "string" } },
+          "completion_checks": { "type": "array", "items": { "type": "string" }, "description": "Full verb-first sentences." },
+          "next_action": { "type": "string" },
+          "filename_slug": { "type": "string", "description": "Lowercase Latin letters and hyphens, e.g. washroom-cleaning." }
+        },
+        "required": ["title", "subtitle", "purpose", "required_items", "steps", "safety_notes", "completion_checks", "next_action", "filename_slug"]
+      }
+    },
+    "required": [
+      "reply_language", "answer_markdown", "next_micro_step", "needs_human_verification",
+      "follow_ups", "profile_update", "source_ids"
+    ]
+  }
+}

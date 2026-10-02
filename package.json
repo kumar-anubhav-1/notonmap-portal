@@ -1,0 +1,14 @@
+{
+  "name": "rural-tourism-mentor-portal",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Rural Tourism Mentor: hospitality guide portal for village hosts (Claude-powered)",
+  "scripts": {
+    "dev": "node dev.js",
+    "dev:mock": "MOCK=1 node dev.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

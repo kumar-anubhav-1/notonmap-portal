@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin | Rural Tourism Mentor</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header><strong>Rural Tourism Mentor</strong> <span>Admin</span></header>
+<main>
+  <section id="login">
+    <h1>Sign in</h1>
+    <p class="muted">Enter the admin token you set in Vercel (ADMIN_TOKEN).</p>
+    <form id="loginForm"><input id="token" type="password" autocomplete="off" aria-label="Admin token"><button class="btn" type="submit">Open</button></form>
+    <p id="loginErr" class="err" hidden></p>
+  </section>
+
+  <section id="panel" hidden>
+    <p id="noStorage" class="warn" hidden>Storage is not connected, so usage counts and journey changes cannot be saved. Add the Upstash Redis variables in Vercel (see README). Usage is still printed in Vercel Logs.</p>
+
+    <h2>Journeys</h2>
+    <p class="muted">Switch journeys on or off and rename them. Changes reach hosts within about 30 seconds. No redeploy needed. Journeys marked "not ready" need their guidance written first.</p>
+    <div id="journeys"></div>
+    <button id="saveBtn" class="btn">Save journey changes</button> <span id="saveMsg" class="muted"></span>
+
+    <h2>Usage</h2>
+    <label class="muted">Last <select id="days"><option>7</option><option>14</option><option>30</option></select> days</label>
+    <div id="cards" class="cards"></div>
+    <h3>By day</h3>
+    <div class="scroll"><table id="dayTable"></table></div>
+    <h3>Most used knowledge rows</h3>
+    <div id="rows" class="muted"></div>
+    <p class="muted">Counts only. Nothing a host types or the guide answers is stored.</p>
+  </section>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

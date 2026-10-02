@@ -1,0 +1,206 @@
+{
+  "_comment": "Portal settings. Set live to true to launch a journey, then redeploy. Journeys that are not live show as 'Coming soon' and their prompt module is never sent to Claude.",
+  "journeys": [
+    {
+      "code": "IMPROVE",
+      "live": true,
+      "module_file": "modules/improve.md",
+      "label": {
+        "en": "I already host guests",
+        "hi": "मैं पहले से मेहमानों की मेज़बानी करता/करती हूँ"
+      },
+      "hint": {
+        "en": "Get better at service, hygiene, records and more",
+        "hi": "सेवा, सफ़ाई, हिसाब-किताब और बहुत कुछ बेहतर करें"
+      },
+      "icon": "🏡",
+      "order": 1,
+      "starters": [
+        {
+          "label": {
+            "en": "Welcoming guests",
+            "hi": "मेहमानों का स्वागत"
+          },
+          "message": {
+            "en": "Help me welcome and look after my guests better.",
+            "hi": "मेहमानों का स्वागत और देखभाल बेहतर करने में मेरी मदद करें।"
+          }
+        },
+        {
+          "label": {
+            "en": "Cleanliness and hygiene",
+            "hi": "सफ़ाई और स्वच्छता"
+          },
+          "message": {
+            "en": "How do I keep my guest rooms and washroom clean?",
+            "hi": "मैं मेहमानों के कमरे और शौचालय की सफ़ाई कैसे रखूँ?"
+          }
+        },
+        {
+          "label": {
+            "en": "Food safety",
+            "hi": "खाने की सुरक्षा"
+          },
+          "message": {
+            "en": "How do I cook and serve food safely to guests?",
+            "hi": "मैं मेहमानों के लिए खाना सुरक्षित तरीके से कैसे बनाऊँ और परोसूँ?"
+          }
+        },
+        {
+          "label": {
+            "en": "Records and pricing",
+            "hi": "हिसाब-किताब और दाम"
+          },
+          "message": {
+            "en": "How do I keep simple records and decide my price?",
+            "hi": "मैं आसान हिसाब-किताब कैसे रखूँ और अपना दाम कैसे तय करूँ?"
+          }
+        },
+        {
+          "label": {
+            "en": "Photos and online listing",
+            "hi": "फ़ोटो और ऑनलाइन लिस्टिंग"
+          },
+          "message": {
+            "en": "How do I take good photos and write my listing?",
+            "hi": "मैं अच्छी फ़ोटो कैसे खींचूँ और अपनी लिस्टिंग कैसे लिखूँ?"
+          }
+        },
+        {
+          "label": {
+            "en": "Handling complaints",
+            "hi": "शिकायत संभालना"
+          },
+          "message": {
+            "en": "How should I handle a guest complaint?",
+            "hi": "मेहमान की शिकायत मैं कैसे संभालूँ?"
+          }
+        },
+        {
+          "label": {
+            "en": "Safety and emergencies",
+            "hi": "सुरक्षा और आपातकाल"
+          },
+          "message": {
+            "en": "How do I get ready for emergencies with guests?",
+            "hi": "मेहमानों के साथ आपातकाल के लिए मैं कैसे तैयार रहूँ?"
+          }
+        },
+        {
+          "label": {
+            "en": "Training my family or staff",
+            "hi": "परिवार या स्टाफ़ को सिखाना"
+          },
+          "message": {
+            "en": "Give me a short training session for my family or staff.",
+            "hi": "मेरे परिवार या स्टाफ़ के लिए एक छोटा प्रशिक्षण सत्र बताइए।"
+          }
+        }
+      ],
+      "ready": true
+    },
+    {
+      "code": "START",
+      "live": true,
+      "module_file": "modules/start.md",
+      "label": {
+        "en": "I want to start",
+        "hi": "मैं शुरुआत करना चाहता/चाहती हूँ"
+      },
+      "hint": {
+        "en": "Plan a homestay or a local experience step by step",
+        "hi": "होमस्टे या स्थानीय अनुभव की योजना कदम-दर-कदम बनाएँ"
+      },
+      "icon": "🌱",
+      "order": 2,
+      "starters": [
+        {
+          "label": {
+            "en": "Start a homestay",
+            "hi": "होमस्टे शुरू करना"
+          },
+          "message": {
+            "en": "I want to start a homestay.",
+            "hi": "मैं होमस्टे शुरू करना चाहता/चाहती हूँ।"
+          }
+        },
+        {
+          "label": {
+            "en": "Start a local experience",
+            "hi": "स्थानीय अनुभव शुरू करना"
+          },
+          "message": {
+            "en": "I want to start a local experience for visitors.",
+            "hi": "मैं मेहमानों के लिए कोई स्थानीय अनुभव शुरू करना चाहता/चाहती हूँ।"
+          }
+        },
+        {
+          "label": {
+            "en": "Not sure what I can offer",
+            "hi": "समझ नहीं आ रहा क्या दूँ"
+          },
+          "message": {
+            "en": "I am not sure what I can offer visitors.",
+            "hi": "मुझे समझ नहीं आ रहा कि मैं मेहमानों को क्या दे सकता/सकती हूँ।"
+          }
+        },
+        {
+          "label": {
+            "en": "What I need before the first guest",
+            "hi": "पहले मेहमान से पहले क्या चाहिए"
+          },
+          "message": {
+            "en": "What do I need before my first guest arrives?",
+            "hi": "मेरे पहले मेहमान के आने से पहले मुझे क्या चाहिए?"
+          }
+        },
+        {
+          "label": {
+            "en": "How much money I need",
+            "hi": "कितने पैसे चाहिए"
+          },
+          "message": {
+            "en": "How do I work out how much money I need to start?",
+            "hi": "शुरू करने के लिए कितने पैसे चाहिए, यह मैं कैसे निकालूँ?"
+          }
+        }
+      ],
+      "ready": true
+    },
+    {
+      "code": "GROW_GREEN",
+      "live": false,
+      "module_file": "modules/grow-green.md",
+      "label": {
+        "en": "Make my stay greener",
+        "hi": "अपने स्थान को और हरित बनाएँ"
+      },
+      "hint": {
+        "en": "Save energy, water and reduce waste",
+        "hi": "ऊर्जा, पानी बचाएँ और कचरा घटाएँ"
+      },
+      "icon": "🍃",
+      "order": 3,
+      "starters": [],
+      "ready": false
+    },
+    {
+      "code": "PARTNERS",
+      "live": false,
+      "module_file": "modules/partners.md",
+      "label": {
+        "en": "I support communities (NGO / trainer)",
+        "hi": "मैं समुदायों की मदद करता/करती हूँ (NGO / प्रशिक्षक)"
+      },
+      "hint": {
+        "en": "Workshops, readiness checks, handouts",
+        "hi": "कार्यशालाएँ, तैयारी की जाँच, हैंडआउट"
+      },
+      "icon": "🤝",
+      "order": 4,
+      "starters": [],
+      "ready": false
+    }
+  ],
+  "not_sure_goes_to": "IMPROVE"
+}
